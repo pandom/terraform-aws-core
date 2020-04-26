@@ -1,16 +1,5 @@
-locals {
-  my_ip = format("%s/32", data.http.this.body)
-}
-
 data aws_availability_zones "this" {
   state = "available"
-}
-
-data http "this" {
-  url = "https://ipv4bot.whatismyipaddress.com"
-  request_headers = {
-    Accept = "application/json"
-  }
 }
 
 module "vpc" {
@@ -36,7 +25,7 @@ module "security_group_ssh" {
   description = "SSH access"
   vpc_id      = module.vpc.vpc_id
 
-  ingress_cidr_blocks = [local.my_ip]
+  ingress_cidr_blocks = ["124.169.61.203/32"]
   ingress_rules = ["ssh-tcp"]
   tags = var.tags
 }

@@ -25,7 +25,7 @@ module "security_group_ssh" {
   description = "SSH access"
   vpc_id      = module.vpc.vpc_id
 
-  ingress_cidr_blocks = ["124.169.61.203/32"]
+  ingress_cidr_blocks = ["220.235.156.186/32"]
   ingress_rules = ["ssh-tcp"]
   tags = var.tags
 }

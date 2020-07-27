@@ -56,7 +56,7 @@ data "aws_route53_zone" "main" {
 
 resource "aws_route53_zone" "aws_sub_zone" {
   name    = "go.hashidemos.io"
-  comment = "Managed by Terraform, Delegated Sub Zone for AWS for ${var.namespace}"
+  comment = "Managed by Terraform, Delegated Sub Zone for AWS for go.hashidemos.io"
 
   tags = {
     name       = "go"

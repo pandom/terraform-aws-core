@@ -49,7 +49,7 @@ module "security_group_outbound" {
 }
 
 module "dns" {
-  source = "github.com/lhaig/terraform-dns-multicloud"
+  source = "github.com/grantorchard/terraform-dns-multicloud"
 
   owner ="Grant Orchard"
   namespace = "go"

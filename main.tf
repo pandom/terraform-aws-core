@@ -4,7 +4,7 @@ data aws_availability_zones "this" {
 
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
-  version = "1.34.0"
+  version = "2.44.0"
 
 
   name = "core"

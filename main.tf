@@ -56,6 +56,7 @@ module "dns" {
   hosted-zone = "hashidemos.io"
   create_aws_dns_zone = true
   aws_region = "ap-southeast-2"
+  gcp_project = "irrelevant"
 }
 
 

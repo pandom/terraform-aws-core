@@ -44,4 +44,14 @@ module "security_group_outbound" {
   tags = var.tags
 }
 
+module "dns" {
+  source = "github.com/lhaig/terraform-dns-multicloud"
+
+  owner ="Grant Orchard"
+  namespace = "go"
+  hosted-zone = "hashidemos.io"
+  create_aws_dns_zone = true
+  aws_region = "ap-southeast-2"
+}
+
 

@@ -4,6 +4,8 @@ data aws_availability_zones "this" {
 
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
+  version = "1.34.0"
+
 
   name = "core"
   cidr = var.vpc_cidr
@@ -20,6 +22,7 @@ module "vpc" {
 
 module "security_group_ssh" {
   source  = "terraform-aws-modules/security-group/aws"
+  version = "3.13.0"
 
   name        = "ssh"
   description = "SSH access"
@@ -35,6 +38,7 @@ module "security_group_ssh" {
 
 module "security_group_outbound" {
   source  = "terraform-aws-modules/security-group/aws"
+  version = "3.13.0"
 
   name        = "outbound"
   description = "outbound access"
@@ -44,32 +48,14 @@ module "security_group_outbound" {
   tags = var.tags
 }
 
-data "aws_route53_zone" "main" {
-  name = "hashidemos.io"
+module "dns" {
+  source = "github.com/lhaig/terraform-dns-multicloud"
+
+  owner ="Grant Orchard"
+  namespace = "go"
+  hosted-zone = "hashidemos.io"
+  create_aws_dns_zone = true
+  aws_region = "ap-southeast-2"
 }
 
-# AWS SUBZONE
 
-resource "aws_route53_zone" "aws_sub_zone" {
-  name    = "go.hashidemos.io"
-  comment = "Managed by Terraform, Delegated Sub Zone for AWS for go.hashidemos.io"
-
-  tags = {
-    name       = "go.hashidemos.io"
-    owner      = "Grant Orchard"
-    created-by = "Grant Orchard"
-    ttl        = "-1"
-  }
-}
-
-resource "aws_route53_record" "aws_sub_zone_ns" {
-  zone_id = data.aws_route53_zone.main.zone_id
-  name    = "go.hashidemos.io"
-  type    = "NS"
-  ttl     = "30"
-
-  records = [
-    for awsns in aws_route53_zone.aws_sub_zone.name_servers :
-    awsns
-  ]
-}

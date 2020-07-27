@@ -48,15 +48,32 @@ module "security_group_outbound" {
   tags = var.tags
 }
 
-module "dns" {
-  source = "github.com/grantorchard/terraform-dns-multicloud"
-
-  owner ="Grant Orchard"
-  namespace = "go"
-  hosted-zone = "hashidemos.io"
-  create_aws_dns_zone = true
-  aws_region = "ap-southeast-2"
-  gcp_project = "irrelevant"
+data "aws_route53_zone" "main" {
+  name = "hashidemos.io"
 }
 
+# AWS SUBZONE
 
+resource "aws_route53_zone" "aws_sub_zone" {
+  name    = "go.hashidemos.io"
+  comment = "Managed by Terraform, Delegated Sub Zone for AWS for ${var.namespace}"
+
+  tags = {
+    name       = "go"
+    owner      = "Grant Orchard"
+    created-by = "Grant Orchard"
+    ttl        = "-1"
+  }
+}
+
+resource "aws_route53_record" "aws_sub_zone_ns" {
+  zone_id = data.aws_route53_zone.main.zone_id
+  name    = "go.hashidemos.io"
+  type    = "NS"
+  ttl     = "30"
+
+  records = [
+    for awsns in aws_route53_zone.aws_sub_zone.name_servers :
+    awsns
+  ]
+}

@@ -55,20 +55,20 @@ data "aws_route53_zone" "main" {
 # AWS SUBZONE
 
 resource "aws_route53_zone" "aws_sub_zone" {
-  name    = "go.hashidemos.io"
-  comment = "Managed by Terraform, Delegated Sub Zone for AWS for go.hashidemos.io"
+  name    = "burkey.hashidemos.io"
+  comment = "Managed by Terraform, Delegated Sub Zone for AWS for burkey.hashidemos.io"
 
   tags = {
-    name       = "go"
-    owner      = "Grant Orchard"
-    created-by = "Grant Orchard"
+    name       = "burkey"
+    owner      = "burkey"
+    created-by = "burkey"
     ttl        = "-1"
   }
 }
 
 resource "aws_route53_record" "aws_sub_zone_ns" {
   zone_id = data.aws_route53_zone.main.zone_id
-  name    = "go.hashidemos.io"
+  name    = "burkey.hashidemos.io"
   type    = "NS"
   ttl     = "30"
 

@@ -31,5 +31,5 @@ variable vpc_cidr {
 }
 
 variable my_cidr {
-  type = list
+  type = string
 }

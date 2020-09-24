@@ -2,7 +2,8 @@ variable tags {
   type = map
   default = {
     TTL   = "48"
-    owner = "Grant Orchard"
+    owner = "Burkey"
+    delete = false
   }
 }
 
@@ -30,5 +31,5 @@ variable vpc_cidr {
 }
 
 variable my_cidr {
-  type = string
+  type = list
 }

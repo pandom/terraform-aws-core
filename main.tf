@@ -50,6 +50,12 @@ module "security_group_outbound" {
   tags = var.tags
 }
 
+# AWS KEY PAIR
+resource "aws_key_pair" "key" {
+  key_name   = "burkey"
+  public_key = var.ssh_public_key
+}
+
 data "aws_route53_zone" "main" {
   name = "hashidemos.io"
 }

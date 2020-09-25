@@ -54,6 +54,8 @@ module "security_group_outbound" {
 resource "aws_key_pair" "key" {
   key_name   = "burkey"
   public_key = var.ssh_public_key
+
+  tags = var.tags
 }
 
 data "aws_route53_zone" "main" {

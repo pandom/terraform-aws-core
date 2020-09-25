@@ -34,6 +34,11 @@ variable my_cidr {
   type = string
 }
 
+
+variable ssh_public_key {
+  type = string
+}
+
 variable sub_zone {
   type= list
   default = []

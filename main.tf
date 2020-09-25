@@ -1,3 +1,5 @@
+data aws_caller_identity "current" {}
+
 data aws_availability_zones "this" {
   state = "available"
 }
@@ -29,7 +31,8 @@ module "security_group_ssh" {
   vpc_id      = module.vpc.vpc_id
 
   ingress_cidr_blocks = [
-    "${var.my_cidr}","${var.my_cidr1}","${var.my_cidr2}","10.0.0.0/16"
+    "${var.my_cidr}",
+    "10.0.0.0/16"
   ]
   ingress_rules = ["ssh-tcp"]
   tags = var.tags
@@ -56,7 +59,7 @@ data "aws_route53_zone" "main" {
 resource "aws_route53_zone" "aws_sub_zone" {
   for_each = toset(var.sub_zone)
   name    = each.value
-  comment = "Managed by Terraform, Delegated Sub Zone for AWS for burkey.hashidemos.io"
+  comment = "Managed by Terraform, Delegated Sub Zone for AWS for go.hashidemos.io"
 
   tags = {
     name       = "burkey"
@@ -66,15 +69,15 @@ resource "aws_route53_zone" "aws_sub_zone" {
   }
 }
 
-// resource "aws_route53_record" "aws_sub_zone_ns" {
-//   for_each = toset(var.sub_zone)
-//   zone_id = data.aws_route53_zone.main.zone_id
-//   name    = each.value
-//   type    = "NS"
-//   ttl     = "30"
+resource "aws_route53_record" "aws_sub_zone_ns" {
+  for_each = toset(var.sub_zone)
+  zone_id = data.aws_route53_zone.main.zone_id
+  name    = each.value
+  type    = "NS"
+  ttl     = "30"
 
-//   records = [
-//     for awsns in aws_route53_zone.aws_sub_zone[each.value].name_servers :
-//     awsns
-//   ]
-// }
+  records = [
+    for awsns in aws_route53_zone.aws_sub_zone[each.value].name_servers :
+    awsns
+  ]
+}

@@ -31,7 +31,7 @@ module "security_group_ssh" {
   vpc_id      = module.vpc.vpc_id
 
   ingress_cidr_blocks = [
-    split(",",var.my_cidrs),
+    split(",",var.my_cidr),
     "10.0.0.0/16"
   ]
   ingress_rules = ["ssh-tcp"]

@@ -30,13 +30,7 @@ variable vpc_cidr {
   default = "10.0.0.0/16"
 }
 
-variable my_cidrs {
-  default = ""
-}
-
-
-
-variable ssh_public_key {
+variable my_cidr {
   type = string
 }
 
@@ -44,10 +38,6 @@ variable sub_zone {
   type= list
   default = []
 }
-
-variable my_cidr1 {
-  type = string
-}
-variable my_cidr2 {
+variable ssh_public_key {
   type = string
 }

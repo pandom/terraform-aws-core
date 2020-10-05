@@ -31,6 +31,7 @@ variable vpc_cidr {
 }
 
 variable my_cidr {
+  default = ""
 }
 
 

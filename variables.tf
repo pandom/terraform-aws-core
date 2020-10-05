@@ -31,8 +31,10 @@ variable vpc_cidr {
 }
 
 variable my_cidr {
-  type = string
+  type = list
+  default = []
 }
+
 
 
 variable ssh_public_key {

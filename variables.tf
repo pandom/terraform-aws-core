@@ -6,7 +6,7 @@ variable tags {
     delete = false
   }
 }
-
+#Test
 variable public_subnets {
   type = list
   default = [

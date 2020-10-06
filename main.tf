@@ -4,7 +4,7 @@ data aws_availability_zones "this" {
   state = "available"
 }
 
-data terraform_remote_state "grantorchard" {
+data terraform_remote_state "this" {
   backend = "remote"
 
   config = {
@@ -102,7 +102,7 @@ resource "aws_route53_record" "aws_sub_zone_ns" {
 }
 # Grant's VPC
 resource "aws_vpc_peering_connection" "foo" {
-  peer_vpc_id   = data.terraform_remote_state.grantorchard.terraform-aws-core.vpc_id
+  peer_vpc_id   = data.terraform_remote_state.this.terraform-aws-core.vpc_id
   vpc_id        = module.vpc.vpc_id
 
   accepter {

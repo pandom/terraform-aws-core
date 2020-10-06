@@ -14,7 +14,7 @@ data terraform_remote_state "this" {
     }
   }
 }
-
+#Remote
 locals {
   vpc_id                  = data.terraform_remote_state.this.outputs.vpc_id
 }

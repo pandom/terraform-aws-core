@@ -15,6 +15,10 @@ data terraform_remote_state "this" {
   }
 }
 
+locals {
+  vpc_id                  = data.terraform_remote_state.this.vpc.vpc_id
+}
+
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
   version = "2.44.0"
@@ -55,7 +59,7 @@ module "security_group_outbound" {
 
   name        = "outbound"
   description = "outbound access"
-  vpc_id      = module.vpc.vpc_id
+  vpc_id      = local.vpc_id
 
   egress_rules = ["all-all"]
   tags = var.tags
@@ -102,7 +106,7 @@ resource "aws_route53_record" "aws_sub_zone_ns" {
 }
 # Grant's VPC
 resource "aws_vpc_peering_connection" "foo" {
-  peer_vpc_id   = data.terraform_remote_state.this.grantorchard.terraform-aws-core.vpc_id
+  peer_vpc_id   = local.vpc_id
   vpc_id        = module.vpc.vpc_id
 
   accepter {

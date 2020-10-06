@@ -16,7 +16,7 @@ data terraform_remote_state "this" {
 }
 
 locals {
-  vpc_id                  = data.terraform_remote_state.this.vpc.vpc_id
+  vpc_id                  = data.terraform_remote_state.this.outputs.vpc_id
 }
 
 module "vpc" {

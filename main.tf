@@ -4,6 +4,17 @@ data aws_availability_zones "this" {
   state = "available"
 }
 
+data terraform_remote_state "grantorchard" {
+  backend = "remote"
+
+  config = {
+    organization = "grantorchard"
+    workspaces = {
+      name = "terraform-aws-core"
+    }
+  }
+}
+
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
   version = "2.44.0"
@@ -88,4 +99,17 @@ resource "aws_route53_record" "aws_sub_zone_ns" {
     for awsns in aws_route53_zone.aws_sub_zone[each.value].name_servers :
     awsns
   ]
+}
+# Grant's VPC
+resource "aws_vpc_peering_connection" "foo" {
+  peer_vpc_id   = data.remote_state.grantorchard.terraform-aws-core.vpc.id
+  vpc_id        = module.vpc.vpc_id
+
+  accepter {
+    allow_remote_vpc_dns_resolution = true
+  }
+
+  requester {
+    allow_remote_vpc_dns_resolution = true
+  }
 }

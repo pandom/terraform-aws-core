@@ -102,7 +102,7 @@ resource "aws_route53_record" "aws_sub_zone_ns" {
 }
 # Grant's VPC
 resource "aws_vpc_peering_connection" "foo" {
-  peer_vpc_id   = data.remote_state.grantorchard.terraform-aws-core.vpc.id
+  peer_vpc_id   = data.remote_state.grantorchard.terraform-aws-core.vpc_id
   vpc_id        = module.vpc.vpc_id
 
   accepter {

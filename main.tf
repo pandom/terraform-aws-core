@@ -4,19 +4,19 @@ data aws_availability_zones "this" {
   state = "available"
 }
 
-data terraform_remote_state "this" {
-  backend = "remote"
+// data terraform_remote_state "this" {
+//   backend = "remote"
 
-  config = {
-    organization = "grantorchard"
-    workspaces = {
-      name = "terraform-aws-core"
-    }
-  }
-}
+//   config = {
+//     organization = "grantorchard"
+//     workspaces = {
+//       name = "terraform-aws-core"
+//     }
+//   }
+// }
 #Remote
 locals {
-  vpc_id                  = data.terraform_remote_state.this.outputs.vpc_id
+  vpc_id                  = "vpc-01e043f2a174a2ecc"
 }
 
 module "vpc" {

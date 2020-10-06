@@ -32,7 +32,7 @@ module "security_group_ssh" {
 # split will take a string and turn into a list
 # join will take list, use the "," for each list item to create a string
 # [] is to wrap it up as a list.
-  ingress_cidr_blocks = ["${join(",",var.my_cidr)}, 10.0.0.0/16"]
+  ingress_cidr_blocks = ["${join(",",var.my_cidr)}", "10.0.0.0/16"]
 
   ingress_rules = ["ssh-tcp"]
   tags = var.tags

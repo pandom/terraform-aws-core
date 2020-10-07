@@ -10,24 +10,24 @@ variable tags {
 variable public_subnets {
   type = list
   default = [
-    "10.0.111.0/24",
-    "10.0.112.0/24",
-    "10.0.113.0/24"
+    "10.10.111.0/24",
+    "10.10.112.0/24",
+    "10.10.113.0/24"
   ]
 }
 
 variable private_subnets {
   type = list
   default = [
-    "10.0.11.0/24",
-    "10.0.21.0/24",
-    "10.0.31.0/24"
+    "10.10.11.0/24",
+    "10.10.21.0/24",
+    "10.10.31.0/24"
   ]
 }
 
 variable vpc_cidr {
   type = string
-  default = "10.0.0.0/16"
+  default = "10.10.0.0/16"
 }
 
 variable my_cidr {

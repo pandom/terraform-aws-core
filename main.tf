@@ -74,7 +74,7 @@ resource "aws_key_pair" "key" {
 }
 
 data "aws_route53_zone" "main" {
-  name = "hashidemos.io"
+  name = "burkey.hashidemos.io"
 }
 
 # AWS SUBZONE

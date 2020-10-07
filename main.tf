@@ -92,18 +92,18 @@ resource "aws_route53_zone" "aws_sub_zone" {
   }
 }
 
-// resource "aws_route53_record" "aws_sub_zone_ns" {
-//   for_each = toset(var.sub_zone)
-//   zone_id = data.aws_route53_zone.main.zone_id
-//   name    = each.value
-//   type    = "NS"
-//   ttl     = "30"
+resource "aws_route53_record" "aws_sub_zone_ns" {
+  for_each = toset(var.sub_zone)
+  zone_id = data.aws_route53_zone.main.zone_id
+  name    = each.value
+  type    = "NS"
+  ttl     = "30"
 
-//   records = [
-//     for awsns in aws_route53_zone.aws_sub_zone[each.value].name_servers :
-//     awsns
-//   ]
-// }
+  records = [
+    for awsns in aws_route53_zone.aws_sub_zone[each.value].name_servers :
+    awsns
+  ]
+}
 # Grant's VPC
 # GRANT CURRENT OWNS THIS IN AWS_CORE
 // resource "aws_vpc_peering_connection" "foo" {

@@ -108,7 +108,7 @@ data "aws_route53_zone" "main" {
 resource "aws_vpc_peering_connection" "foo" {
   peer_vpc_id   = local.vpc_id
   vpc_id        = module.vpc.vpc_id
-
+  auto_accept = true
   accepter {
     allow_remote_vpc_dns_resolution = true
   }

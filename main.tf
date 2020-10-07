@@ -105,15 +105,15 @@ data "aws_route53_zone" "main" {
 //   ]
 // }
 # Grant's VPC
-// resource "aws_vpc_peering_connection" "foo" {
-//   peer_vpc_id   = local.vpc_id
-//   vpc_id        = module.vpc.vpc_id
+resource "aws_vpc_peering_connection" "foo" {
+  peer_vpc_id   = local.vpc_id
+  vpc_id        = module.vpc.vpc_id
 
-//   accepter {
-//     allow_remote_vpc_dns_resolution = true
-//   }
+  accepter {
+    allow_remote_vpc_dns_resolution = true
+  }
 
-//   requester {
-//     allow_remote_vpc_dns_resolution = true
-//   }
-// }
+  requester {
+    allow_remote_vpc_dns_resolution = true
+  }
+}

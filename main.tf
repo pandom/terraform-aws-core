@@ -21,7 +21,7 @@ data aws_availability_zones "this" {
 
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
-  version = "2.44.0"
+  version = "3.11.0"
 
 
   name = "core"
@@ -39,7 +39,7 @@ module "vpc" {
 
 module "security_group_ssh" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "3.13.0"
+  version = "~>4.0"
 
   name        = "ssh"
   description = "SSH access"

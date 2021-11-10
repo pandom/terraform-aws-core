@@ -15,9 +15,9 @@ data aws_availability_zones "this" {
 //   }
 // }
 #Remote
-locals {
-  vpc_id                  = "vpc-01e043f2a174a2ecc"
-}
+# locals {
+#   vpc_id                  = "vpc-01e043f2a174a2ecc"
+# }
 
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"

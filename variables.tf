@@ -32,7 +32,7 @@ variable vpc_cidr {
 
 variable my_cidr {
   type = list
-  default = []
+  default = ["120.158.202.169"]
 }
 
 variable sub_zone {

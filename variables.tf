@@ -1,44 +1,40 @@
-variable tags {
-  type = map
-  default = {
-    TTL   = "48"
-    owner = "Burkey"
-    delete = false
-  }
+#region for deployment
+variable "aws_region" {
+    default = "ap-southeast-2"
+    type = string
+    description = "sydney, australia"
 }
-#Test
-variable public_subnets {
-  type = list
-  default = [
-    "10.10.111.0/24",
-    "10.10.112.0/24",
-    "10.10.113.0/24"
-  ]
+variable "aws_availability_zones" {
+    type = list
+    description = "ap-southeast-2 azs"
+    default = ["apse2-az1", "apse2-az2", "apse2-az3"]
+
 }
 
-variable private_subnets {
-  type = list
-  default = [
-    "10.10.11.0/24",
-    "10.10.21.0/24",
-    "10.10.31.0/24"
-  ]
+
+## VPC Variables
+
+variable "vpc_name" {
+    type = string
+    description = "VPC name"
+    default = "main vpc"
+  
 }
 
-variable vpc_cidr {
-  type = string
-  default = "10.10.0.0/16"
+variable "vpc_cidr" {
+    type = string
+    description = "must contain private/public subnets within"
+    default = "10.0.0.0/16"
+}
+variable "vpc_private_subnets" {
+    type = list
+    description = "private subnets"
+    default = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
+  
 }
 
-variable my_cidr {
-  type = list
-  default = ["120.158.202.169"]
-}
-
-variable sub_zone {
-  type= list
-  default = []
-}
-variable ssh_public_key {
-  type = string
+variable "vpc_public_subnets" {
+    type = list
+    description = "public subnets"
+    default = ["10.0.101.0/24", "10.0.102.0/24", "10.0.103.0/24"]
 }

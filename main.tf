@@ -53,17 +53,17 @@ module "security_group_ssh" {
   tags = var.tags
 }
 
-module "security_group_outbound" {
-  source  = "terraform-aws-modules/security-group/aws"
-  version = "3.13.0"
+# module "security_group_outbound" {
+#   source  = "terraform-aws-modules/security-group/aws"
+#   version = "3.13.0"
 
-  name        = "outbound"
-  description = "outbound access"
-  vpc_id      = local.vpc_id
+#   name        = "outbound"
+#   description = "outbound access"
+#   vpc_id      = local.vpc_id
 
-  egress_rules = ["all-all"]
-  tags = var.tags
-}
+#   egress_rules = ["all-all"]
+#   tags = var.tags
+# }
 
 # AWS KEY PAIR
 resource "aws_key_pair" "key" {

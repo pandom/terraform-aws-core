@@ -1,6 +1,6 @@
 #region for deployment
 variable "aws_region" {
-    default = "us-east-2"
+    default = "ap-southeast-2"
     type = string
     description = "sydney, australia"
 }
@@ -17,7 +17,7 @@ variable "aws_availability_zones" {
 variable "vpc_name" {
     type = string
     description = "VPC name"
-    default = "main vpc"
+    default = "burkey-vpc"
   
 }
 

@@ -1,6 +1,6 @@
 #region for deployment
 variable "aws_region" {
-    default = "us-east-2"
+    default = "ap-southeast-1"
     type = string
     description = "sydney, australia"
 }

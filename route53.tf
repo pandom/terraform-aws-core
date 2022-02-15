@@ -16,14 +16,14 @@ resource "aws_route53_zone" "aws_sub_zone" {
   }
 }
 
-resource "aws_route53_record" "aws_sub_zone_ns" {
-  zone_id = data.aws_route53_zone.main.zone_id
-  name    = "burkey.hashidemos.io"
-  type    = "NS"
-  ttl     = "30"
+# resource "aws_route53_record" "aws_sub_zone_ns" {
+#   zone_id = data.aws_route53_zone.main.zone_id
+#   name    = "burkey.hashidemos.io"
+#   type    = "NS"
+#   ttl     = "30"
 
-  records = [
-    for awsns in aws_route53_zone.aws_sub_zone.name_servers :
-    awsns
-  ]
-}
+#   records = [
+#     for awsns in aws_route53_zone.aws_sub_zone.name_servers :
+#     awsns
+#   ]
+# }
